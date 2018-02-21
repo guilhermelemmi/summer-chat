@@ -31,13 +31,21 @@ const registerPassword = document.querySelector('#register-password');
 
 let chatState = 'loging';
 let chatUser = null;
+let chatUserProfile = null;
 handleUIChanges();
 
 firebase.auth().onAuthStateChanged(function (user) {
-  console.log(user);
-  chatUser = user;
   chatState = user ? 'chat' : 'login';  
   handleUIChanges();
+  
+  if (user) {
+    chatUser = user;
+    //load user profile
+    db.ref('/users').child(user.uid).once('value')
+      .then(function(snap) {
+        chatUserProfile = snap.val();
+      });
+  }
 });
 
 chatForm.addEventListener('submit', handleMessageSubmit);
@@ -92,7 +100,8 @@ function handleMessageSubmit(e) {
 
   db.ref('chats').push({
     userId: chatUser && chatUser.uid,
-    message: textBox.value
+    message: textBox.value,
+    userName: chatUserProfile && chatUserProfile.name
   });
   
   textBox.value = '';
@@ -101,8 +110,10 @@ function handleMessageSubmit(e) {
 function handleChildAdded(data) {
   const messageData = data.val();
   const li = document.createElement('li');
-  
-  li.innerHTML = messageData.message;
+
+  let msg = '<strong>'+messageData.userName+'</strong>';
+  msg += '<p>' + messageData.message + '</p>';  
+  li.innerHTML = msg;
   
   if (chatUser && messageData.userId !== chatUser.uid) {
     li.classList.add('other');
@@ -139,7 +150,7 @@ function handleUIChanges() {
 
 function handleKeyDown(e) {
   if (e.keyCode == 13) {
-    handleSubmit(e);
+    handleMessageSubmit(e);
     e.preventDefault();
   }
 }
