@@ -21,6 +21,13 @@ const loginButton = document.querySelector('#login-button');
 const loginEmail = document.querySelector('#login-email');
 const loginPassword = document.querySelector('#login-password');
 const logoutButton = document.querySelector('#logout-button');    
+const registerLink = document.querySelector('#register-link');
+
+const registerContainer = document.querySelector('.register-container');
+const registerButton = document.querySelector('#register-button');
+const registerName = document.querySelector('#register-name');
+const registerEmail = document.querySelector('#register-email');
+const registerPassword = document.querySelector('#register-password');
 
 let chatState = 'loging';
 let chatUser = null;
@@ -37,6 +44,8 @@ chatForm.addEventListener('submit', handleMessageSubmit);
 textBox.addEventListener('keydown', handleKeyDown);
 loginButton.addEventListener('click', handleLogin);
 logoutButton.addEventListener('click', handleLogout);
+registerButton.addEventListener('click', handleRegister);
+registerLink.addEventListener('click', handleGoToRegister);
 
 function handleLogin(e) {
   e.preventDefault();
@@ -55,6 +64,18 @@ function handleLogout(e) {
   });
 }
 
+function handleGoToRegister() {
+  chatState = 'register';
+  handleUIChanges();
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  if (registerName.value && registerEmail.value && registerPassword.value) {
+    console.log('try to create new user');
+  }
+}
+
 function handleMessageSubmit(e) {
   e.preventDefault();
   
@@ -63,7 +84,7 @@ function handleMessageSubmit(e) {
   }
 
   db.ref('chats').push({
-    userId: chatUser.uid,
+    userId: chatUser && chatUser.uid,
     message: textBox.value
   });
   
@@ -76,7 +97,7 @@ function handleChildAdded(data) {
   
   li.innerHTML = messageData.message;
   
-  if (messageData.userId !== chatUser.uid) {
+  if (chatUser && messageData.userId !== chatUser.uid) {
     li.classList.add('other');
   }
   
@@ -91,10 +112,18 @@ function handleUIChanges() {
       chatContainer.classList.remove('hide');
       logoutButton.classList.remove('hide');
       loginContainer.classList.add('hide');
+      registerContainer.classList.add('hide');
+      break;
+    case 'register':
+      chatContainer.classList.add('hide');
+      registerContainer.classList.remove('hide');
+      loginContainer.classList.add('hide');
+      logoutButton.classList.add('hide');
       break;
     case 'login':
-    default:
+      default:
       loginContainer.classList.remove('hide');
+      registerContainer.classList.add('hide');
       chatContainer.classList.add('hide');
       logoutButton.classList.add('hide');
       break;
