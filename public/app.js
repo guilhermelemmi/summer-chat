@@ -9,6 +9,7 @@ const config = {
 firebase.initializeApp(config);
 const db = firebase.database();
 const chatsRef = db.ref('/chats');
+chatsRef.on('child_added', handleChildAdded);
 
 const chatForm = document.querySelector('form');
 const textBox = document.querySelector('textarea');
@@ -31,6 +32,20 @@ function handleMessageSubmit(e) {
   });
   
   textBox.value = '';
+}
+
+function handleChildAdded(data) {
+  const messageData = data.val();
+  const li = document.createElement('li');
+  
+  li.innerHTML = messageData.message;
+  
+  if (messageData.userId !== sessionId) {
+    li.classList.add('other');
+  }
+  
+  chats.appendChild(li);
+  chats.scrollTop = chats.scrollHeight;
 }
 
 function handleKeyDown(e) {
