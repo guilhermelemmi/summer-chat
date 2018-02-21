@@ -70,7 +70,8 @@
 .chat-container textarea 
 {
 	vertical-align:top;
-	overflow:auto;
+  overflow:auto;
+  margin-left: 70px;
 }
 
 body {
@@ -87,6 +88,11 @@ body {
 
 #logout-button {
   flex-basis: 1;
+}
+
+#attach-button {
+  position:relative;
+  color: white;
 }
 
 .chat-container {

@@ -29,6 +29,9 @@ const registerName = document.querySelector('#register-name');
 const registerEmail = document.querySelector('#register-email');
 const registerPassword = document.querySelector('#register-password');
 
+const attachButton = document.querySelector('#attach-button');
+const fileInput = document.querySelector('#file-input');
+
 let chatState = 'loging';
 let chatUser = null;
 let chatUserProfile = null;
@@ -54,6 +57,8 @@ loginButton.addEventListener('click', handleLogin);
 logoutButton.addEventListener('click', handleLogout);
 registerButton.addEventListener('click', handleRegister);
 registerLink.addEventListener('click', handleGoToRegister);
+attachButton.addEventListener('click', handleAttachButton);
+fileInput.addEventListener('change', handleFileUpload);
 
 function handleLogin(e) {
   e.preventDefault();
@@ -88,6 +93,26 @@ function handleRegister(e) {
           email: registerEmail.value
         })
       });
+  }
+}
+
+function handleAttachButton(e) {
+  e.preventDefault();
+  fileInput.click();
+}
+
+function handleFileUpload() {
+  var file = fileInput.files[0];
+  if (file) {
+    const storageRef = firebase.storage().ref();
+    const uploadTask = storageRef.child('images/' + file.name).put(file);
+    uploadTask.on('state_changed',
+      function(e) {
+        console.log(e);
+      },
+      function(error) { console.log(error); },
+      function() { console.log(uploadTask.snapshot.downloadURL); }
+    );
   }
 }
 
