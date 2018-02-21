@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/guilhermelemmi/summer-chat#readme",
   "devDependencies": {
+    "firebase-bolt": "^0.8.2",
     "firebase-tools": "^3.17.4"
   }
 }
