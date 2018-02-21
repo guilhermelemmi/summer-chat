@@ -71,8 +71,15 @@ function handleGoToRegister() {
 
 function handleRegister(e) {
   e.preventDefault();
-  if (registerName.value && registerEmail.value && registerPassword.value) {
-    console.log('try to create new user');
+  if (registerName.value && registerEmail.value && registerPassword.value) {    
+    firebase.auth()
+      .createUserWithEmailAndPassword(registerEmail.value, registerPassword.value)
+      .then(function (user) {
+        db.ref('/users').child(user.uid).set({
+          name: registerName.value,
+          email: registerEmail.value
+        })
+      });
   }
 }
 
