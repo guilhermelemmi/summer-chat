@@ -1,0 +1,1 @@
+A Firebase chat created for educational purposes.
