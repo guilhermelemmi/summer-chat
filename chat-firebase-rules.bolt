@@ -1,0 +1,17 @@
+function isSignedIn() {
+  auth != null
+}
+
+function isCurrentUser (uid) {
+  isSignedIn() && auth.uid === uid;
+}
+
+path /chats {
+  write() { isSignedIn() }
+  read() { isSignedIn() }
+}
+
+path /users/{uid} {
+  write() { isCurrentUser(uid) }
+  read() { isCurrentUser(uid) }
+}

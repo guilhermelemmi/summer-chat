@@ -1,0 +1,27 @@
+{
+  "name": "monitorasummer-firebase",
+  "version": "1.0.0",
+  "description": "a firebase chat",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guilhermelemmi/summer-chat.git"
+  },
+  "keywords": [
+    "firebase",
+    "chat"
+  ],
+  "author": "Guilherme Lemmi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/guilhermelemmi/summer-chat/issues"
+  },
+  "homepage": "https://github.com/guilhermelemmi/summer-chat#readme",
+  "devDependencies": {
+    "firebase-bolt": "^0.8.2",
+    "firebase-tools": "^3.17.4"
+  }
+}

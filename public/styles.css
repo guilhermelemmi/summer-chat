@@ -1,0 +1,187 @@
+.hide {
+  display: none;
+}
+
+.register-container label, .login-container label {
+  display: block;
+}
+
+.chat-container input,
+.chat-container label,
+.chat-container select,
+.chat-container button,
+.chat-container textarea
+{
+	margin:0;
+	border:0;
+	padding:0;
+	display:inline-block;
+	vertical-align:middle;
+	white-space:normal;
+	background:none;
+	line-height:1;
+	
+	/* Browsers have different default form fonts */
+	font-size:13px;
+	font-family:Arial;
+}
+
+/* Remove the stupid outer glow in Webkit */
+.chat-container input:focus
+{
+	outline:0;
+}
+
+/* Box Sizing Reset
+-----------------------------------------------*/
+
+/* All of our custom controls should be what we expect them to be */
+.chat-container input,
+.chat-container textarea
+{
+	-webkit-box-sizing:content-box;
+	-moz-box-sizing:content-box;
+	box-sizing:content-box;
+}
+
+/* These elements are usually rendered a certain way by the browser */
+.chat-container button,
+.chat-container input[type=reset],
+.chat-container input[type=button],
+.chat-container input[type=submit],
+.chat-container input[type=checkbox],
+.chat-container input[type=radio],
+.chat-container select
+{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.chat-container button,
+.chat-container input[type="reset"],
+.chat-container input[type="button"],
+.chat-container input[type="submit"]
+{
+	overflow:visible;
+	width:auto;
+}
+
+.chat-container textarea 
+{
+	vertical-align:top;
+  overflow:auto;
+  margin-left: 70px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #e3e3e3;
+  font-family: 'Open Sans', sans-serif;
+  flex-direction: column;
+}
+
+#logout-button {
+  flex-basis: 1;
+}
+
+#attach-button {
+  position:relative;
+  color: white;
+}
+
+.chat-container {
+  border-radius: 5px;
+  position: relative;
+  height: 75%;
+  width: 50%;
+  overflow: hidden;
+}
+
+.chat-box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 10%;
+}
+
+#reviewForm {
+  display: flex;  
+}
+
+#message {
+/*   width: 100%; */
+}
+
+.chat-feed {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  height: 90%;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  list-style: none;
+  margin-top: 0;
+  background-color: #e4ced0;
+}
+
+li {
+  border-radius: 5px;
+  background-color: #fff;
+  list-style: none;
+  width: fit-content;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+li.other {
+  background-color: #e3e3e3;
+  align-self: flex-end;
+}
+
+li:last-of-type {
+  margin-bottom: 0;
+}
+
+textarea {
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  border: none;
+  overflow: auto;
+  outline: none;
+  padding-top: 8px;
+  padding-left: 8px;
+}
+
+.chat-container button {
+  transition: background-color 300ms;
+  position: absolute;
+  right: 0;
+  width: 10%;
+  height: 100%;
+  background-color: #bcd5f3;
+  outline: none;
+}
+
+.chat-container button:hover { 
+  cursor: pointer;
+  background-color: #d4e0fa;
+}
+
+.chat-container button:active {
+  background-color: #bcd4f3;
+}
+
+.fa-paper-plane {
+  color: #fff;
+  font-size: 16px;
+}
